@@ -352,7 +352,7 @@ extension UIView {
 }
 
 extension UIView {
-    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+    public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.cgPath
@@ -406,7 +406,7 @@ extension UIView {
         }
     }
     
-    func onClick(_ target: Any?, _ selector: Selector) {
+    public func onClick(_ target: Any?, _ selector: Selector) {
         let gesture = UITapGestureRecognizer(target: target, action: selector)
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
@@ -425,7 +425,7 @@ extension UIView {
         }, completion: nil)
     }
     
-    var isVisible: Bool {
+    public var isVisible: Bool {
         set {
             newValue ? show() : hide()
         }

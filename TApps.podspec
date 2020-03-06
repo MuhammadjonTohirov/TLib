@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name = "TApps"
-    spec.version = "1.0.3"
+    spec.version = "1.0.4"
     spec.summary = "TLibs is framework which is used to develope an application in a faster speed with swift for iOS"
     spec.homepage = "https://github.com/MuhammadjonTohirov/TLib"
     spec.license = { type: 'MIT', file: 'LICENSE' }
