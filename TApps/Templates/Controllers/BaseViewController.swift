@@ -83,7 +83,7 @@ open class BaseViewController: UIViewController, ThemeDesignable {
         backgroundImageView.contentMode = .scaleAspectFill
     }
     
-    public func initialize() {
+    open func initialize() {
         
     }
     
@@ -96,7 +96,7 @@ open class BaseViewController: UIViewController, ThemeDesignable {
     }
     
     /// update design function is responsible for colors, shadows, transparency and such staffes
-    public func updateDesign() {
+    open func updateDesign() {
         self.view.backgroundColor = theme.backgroundColor
     }
     
