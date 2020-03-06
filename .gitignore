@@ -1,0 +1,25 @@
+**/.DS_Store
+build/
+DerivedData
+
+*.pbxuser
+!default.pbxuser
+*.model1v3
+!default.model1v3
+*.model2v3
+!defaul.model2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+
+## Other
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+
+*.hmap
+*.ipa
+.build/
+Carthage/Build
+
