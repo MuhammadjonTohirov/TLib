@@ -87,7 +87,7 @@ open class BaseViewController: UIViewController, ThemeDesignable {
         
     }
     
-    public func updateSubviewFrames(_ size: CGSize) {
+    open func updateSubviewFrames(_ size: CGSize) {
         let x: CGFloat = 0
         let h: CGFloat = self.bottomSafe
         let w: CGFloat = size.width - 2 * x
