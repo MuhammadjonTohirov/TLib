@@ -51,11 +51,14 @@ public class DefaultTheme: ThemeProtocol {
 
 public enum TThemeType: Int {
     case `default` = 0
+    case secondary
     
     public static func identify(_ id: Int?) -> TThemeType {
         switch id {
         case 0:
             return .default
+        case 1:
+            return .secondary
         default:
             return .default
         }
@@ -63,17 +66,19 @@ public enum TThemeType: Int {
 }
 
 
-public class TThemeManager {
+open class TThemeManager {
     public static let shared = TThemeManager()
     
-    public var type: TThemeType = .default
+    open var type: TThemeType = .default
     
-    public var theme: ThemeProtocol = DefaultTheme()
+    open var theme: ThemeProtocol = DefaultTheme()
     
-    public func applyTheme(_ type: TThemeType) {
+    open func applyTheme(_ type: TThemeType) {
         self.type = type
         switch type {
         case .default:
+            self.theme = DefaultTheme()
+        case .secondary:
             self.theme = DefaultTheme()
         }
     }
