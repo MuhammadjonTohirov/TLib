@@ -35,19 +35,19 @@ open class TTableView: UITableView, TUIContainerProtocol {
         self.separatorColor = .clear
     }
     
-    public func updateFrames(_ size: CGSize) {
+    open func updateFrames(_ size: CGSize) {
         
     }
     
-    public func updateDesign() {
+    open func updateDesign() {
         
     }
     
-    public func register<T: UITableViewCell>(classObj: T.Type) {
+    open func register<T: UITableViewCell>(classObj: T.Type) {
         self.register(classObj, forCellReuseIdentifier: String(describing: classObj))
     }
     
-    public func dequeue<T: UITableViewCell>(classObj: T.Type, indexPath: IndexPath) -> T? {
+    open func dequeue<T: UITableViewCell>(classObj: T.Type, indexPath: IndexPath) -> T? {
         return self.dequeueReusableCell(withIdentifier: String(describing: classObj), for: indexPath) as? T
     }
     

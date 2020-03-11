@@ -15,7 +15,7 @@ extension UIView {
         self.frame = CGRect(x: x, y: y, width: w, height: h)
     }
     
-    func addSubviews(views: UIView...) {
+    open func addSubviews(views: UIView...) {
         views.forEach { (v) in
             self.addSubview(v)
         }
@@ -236,7 +236,7 @@ extension UIView {
 }
 
 extension UIView {
-    public func addGradient(colors: CGColor..., points: (CGPoint, CGPoint) = (CGPoint(x: 0.5, y: 0), CGPoint(x: 0.5, y: 1)), location: [NSNumber] = [0, 1]) {
+    open func addGradient(colors: CGColor..., points: (CGPoint, CGPoint) = (CGPoint(x: 0.5, y: 0), CGPoint(x: 0.5, y: 1)), location: [NSNumber] = [0, 1]) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = colors
         gradientLayer.startPoint = points.0
@@ -256,7 +256,7 @@ extension UIView {
     /// - Parameter style: Blur effect style
     /// - Returns: Int (tag of added blur effect)
     @discardableResult
-    public func makeBlur(style: UIBlurEffect.Style = .dark) -> Int {
+    open func makeBlur(style: UIBlurEffect.Style = .dark) -> Int {
         if let _ = self.viewWithTag(1232) {
             return 1232
         }

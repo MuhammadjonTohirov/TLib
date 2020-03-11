@@ -8,31 +8,35 @@
 
 import UIKit
 
-public final class TLabel: TView {
+open class TLabel: TView {
     public lazy var label: UILabel = {
         let l = UILabel()
         l.textAlignment = .left
         return l
     }()
     
-    public var estimatedHeight: CGFloat {
+    open var estimatedHeight: CGFloat {
         return (self.label.text ?? "").heightWithWidth(width: self.width, font: self.label.font) + 8
     }
     
-    public func estimatedHeight(_ w: CGFloat) -> CGFloat {
+    open func estimatedHeight(_ w: CGFloat) -> CGFloat {
         return (self.label.text ?? "").heightWithWidth(width: w, font: self.label.font) + 4
     }
     
-    public var estimatedWidth: CGFloat {
+    open func estimatedHeight(_ w: CGFloat, _ lineHeightMultiple: CGFloat) -> CGFloat {
+        return (self.label.text ?? "").heightWithWidth(width: w, font: self.label.font) + 4
+    }
+    
+    open var estimatedWidth: CGFloat {
         return (self.label.text ?? "").width(self.label.font) + 16
     }
     
-    public override func initView() {
+    open override func initView() {
         super.initView()
         self.addSubview(label)
     }
     
-    public override func updateFrames(_ size: CGSize) {
+    open override func updateFrames(_ size: CGSize) {
         super.updateFrames(size)
         let x: CGFloat = 2
         let y: CGFloat = x

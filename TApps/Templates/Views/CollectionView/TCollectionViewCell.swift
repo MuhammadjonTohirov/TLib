@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TCollectionViewCell: UICollectionViewCell, TUIContainerProtocol {
+open class TCollectionViewCell: UICollectionViewCell, TUIContainerProtocol {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.initView()
@@ -25,16 +25,16 @@ public class TCollectionViewCell: UICollectionViewCell, TUIContainerProtocol {
     }
     
     /// init function
-    public func initView() {
+    open func initView() {
         self.updateDesign()
     }
     
     /// layouts subviews function
-    public func updateFrames(_ size: CGSize) {
+    open func updateFrames(_ size: CGSize) {
         
     }
     
-    public func updateDesign() {
+    open func updateDesign() {
         
     }
 }

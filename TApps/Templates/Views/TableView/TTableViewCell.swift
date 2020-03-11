@@ -19,7 +19,7 @@ open class TTableViewCell: UITableViewCell, TUIContainerProtocol {
         super.init(coder: coder)
     }
     
-    public func initView() {
+    open func initView() {
         self.updateDesign()
         self.selectionStyle = .none
     }
@@ -29,15 +29,15 @@ open class TTableViewCell: UITableViewCell, TUIContainerProtocol {
         self.updateFrames(size)
     }
     
-    public func updateFrames(_ size: CGSize) {
+    open func updateFrames(_ size: CGSize) {
         
     }
     
-    public func updateDesign() {
+    open func updateDesign() {
         
     }
     
-    func populate<T>(_ item: T) {
+    open func populate<T>(_ item: T) {
         
     }
 }

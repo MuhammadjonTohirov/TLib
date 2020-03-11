@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		46E4026D7959D3B7DE44B134 /* Pods_TApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E4E7BF3E62DCBCFA4D63D9 /* Pods_TApps.framework */; };
 		4D02154C5D61B5E34403D7C7 /* Pods_TApps_TAppsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CD42BC2EC96F9A581344D5 /* Pods_TApps_TAppsTests.framework */; };
+		C90263462419002B00FAE985 /* PViewToPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90263452419002B00FAE985 /* PViewToPresenter.swift */; };
 		C9060DD5241221A700261839 /* TApps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9060DCB241221A700261839 /* TApps.framework */; };
 		C9060DDA241221A700261839 /* TAppsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9060DD9241221A700261839 /* TAppsTests.swift */; };
 		C9060DDC241221A700261839 /* TApps.h in Headers */ = {isa = PBXBuildFile; fileRef = C9060DCE241221A700261839 /* TApps.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,6 +101,7 @@
 		0A9B02EC155131E6CEC447A9 /* Pods-TApps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TApps.release.xcconfig"; path = "Target Support Files/Pods-TApps/Pods-TApps.release.xcconfig"; sourceTree = "<group>"; };
 		42CD42BC2EC96F9A581344D5 /* Pods_TApps_TAppsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TApps_TAppsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B717742D341C73E51307D4E /* Pods-TApps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TApps.debug.xcconfig"; path = "Target Support Files/Pods-TApps/Pods-TApps.debug.xcconfig"; sourceTree = "<group>"; };
+		C90263452419002B00FAE985 /* PViewToPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PViewToPresenter.swift; sourceTree = "<group>"; };
 		C9060DCB241221A700261839 /* TApps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TApps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9060DCE241221A700261839 /* TApps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TApps.h; sourceTree = "<group>"; };
 		C9060DCF241221A700261839 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 			children = (
 				C9060E3E241221E200261839 /* Indexable.swift */,
 				C9060E3F241221E200261839 /* TUIProtocol.swift */,
+				C90263452419002B00FAE985 /* PViewToPresenter.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -552,7 +555,6 @@
 				E376DB144A06C331949AA2A2 /* Pods-TApps-TAppsTests.debug.xcconfig */,
 				E2554C889E1E925B99048F96 /* Pods-TApps-TAppsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -755,6 +757,7 @@
 				C9060E86241221E300261839 /* ITextField.swift in Sources */,
 				C9060E8E241221E300261839 /* NUtil.swift in Sources */,
 				C9060E8A241221E300261839 /* Language.swift in Sources */,
+				C90263462419002B00FAE985 /* PViewToPresenter.swift in Sources */,
 				C9060E84241221E300261839 /* FormModel.swift in Sources */,
 				C9060E6F241221E300261839 /* TransparentViewController.swift in Sources */,
 				C9060E7E241221E300261839 /* TLabelSegment.swift in Sources */,

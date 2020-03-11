@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-public class TView: UIView, TUIProtocol, TUIContainerProtocol {
+open class TView: UIView, TUIProtocol, TUIContainerProtocol {
     public var hasClickEffect = false
     
     @IBInspectable
@@ -60,7 +60,7 @@ public class TView: UIView, TUIProtocol, TUIContainerProtocol {
     
     public var framesUpdated: ((_ requiredSize: CGSize) -> Void)?
     
-    public func setupShadow() {
+    open func setupShadow() {
         self.addShadow(shadowColor: self.shadowColor, radius: self.shadowRadius, width: self.shadowX, height: self.shadowY)
     }
     
@@ -85,16 +85,16 @@ public class TView: UIView, TUIProtocol, TUIContainerProtocol {
     }
     
     /// layouts subviews function
-    public func updateFrames(_ size: CGSize) {
+    open func updateFrames(_ size: CGSize) {
         
     }
     
     /// update design, colors or fonts
-    public func updateDesign() {
+    open func updateDesign() {
         
     }
     
-    public func makeDashedBorderDashed(_ color: UIColor, _ space: NSNumber = 5) {
+    open func makeDashedBorderDashed(_ color: UIColor, _ space: NSNumber = 5) {
         let v = CAShapeLayer()
         v.strokeColor = color.cgColor
         v.lineDashPattern = [3, space]
