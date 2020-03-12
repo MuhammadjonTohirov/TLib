@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIApplication {
-    func topViewController() -> UIViewController? {
+    open func topViewController() -> UIViewController? {
         guard let keyWindow = UIApplication.shared.keyWindow else { return nil }
         return findTopViewController(rootViewController: keyWindow.rootViewController)
     }

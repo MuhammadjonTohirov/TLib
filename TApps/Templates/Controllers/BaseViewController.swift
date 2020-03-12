@@ -8,6 +8,8 @@
 
 import UIKit
 
+public var editableActiveControl: UIControl?
+
 open class BaseViewController: UIViewController, ThemeDesignable {
     fileprivate lazy var backgroundImageView: UIImageView = {
         let v = UIImageView()
@@ -130,6 +132,36 @@ open class BaseViewController: UIViewController, ThemeDesignable {
     private func actionOnKeyboard(_ isVisible: Bool, rect: CGRect) {
         logger.log(message: "Keyboard visible \(isVisible)")
         self.onKeyboardStateChange?(isVisible, rect)
+        
+        guard let control = editableActiveControl else {
+            return
+        }
+        
+        let fieldFrame = control.convert(control.frame, from: nil)
+        let maxY = abs(fieldFrame.origin.y) + fieldFrame.height
+        let distance = rect.origin.y - maxY
+        
+        func show() {
+            UIView.animate(withDuration: 0.33) {
+                self.view.origin.y = self.view.origin.y - CGFloat(abs(distance))
+            }
+        }
+        
+        func hide() {
+            UIView.animate(withDuration: 0.33) {
+                self.view.origin.y = 0
+            }
+        }
+        logger.log(message: "Distance \(distance)")
+        if isVisible {
+            if distance < 0 {
+                show()
+                return
+            }
+            hide()
+        } else {
+            hide()
+        }
     }
     
     open var hideKeyboardWhenTap: Bool = false {
