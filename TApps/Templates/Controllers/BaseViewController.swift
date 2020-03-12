@@ -38,6 +38,8 @@ open class BaseViewController: UIViewController, ThemeDesignable {
         }
     }
     
+    open var onKeyboardStateChange: ((_ isVisible: Bool, _ keyboardFrame: CGRect) -> Void)?
+    
     open var backgroundImage: UIImage? {
         set {
             if let v = self.view.viewWithTag(191) as? UIImageView {
@@ -74,7 +76,7 @@ open class BaseViewController: UIViewController, ThemeDesignable {
         self.updateDesign()
         self.addSubview(bottomSafeView)
     }
-       
+    
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -84,7 +86,15 @@ open class BaseViewController: UIViewController, ThemeDesignable {
     }
     
     open func initialize() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardShowNotification),
+                                               name: UIResponder.keyboardDidShowNotification,
+                                               object: nil)
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardHideNotification),
+                                               name: UIResponder.keyboardDidHideNotification,
+                                               object: nil)
     }
     
     open func updateSubviewFrames(_ size: CGSize) {
@@ -103,6 +113,23 @@ open class BaseViewController: UIViewController, ThemeDesignable {
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.updateSubviewFrames(self.view.size)
+    }
+    
+    @objc func keyboardShowNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo, let fr = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.actionOnKeyboard(true, rect: fr)
+        }
+    }
+    
+    @objc func keyboardHideNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo, let fr = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.actionOnKeyboard(false, rect: fr)
+        }
+    }
+    
+    private func actionOnKeyboard(_ isVisible: Bool, rect: CGRect) {
+        logger.log(message: "Keyboard visible \(isVisible)")
+        self.onKeyboardStateChange?(isVisible, rect)
     }
     
     open var hideKeyboardWhenTap: Bool = false {
@@ -133,5 +160,9 @@ open class BaseViewController: UIViewController, ThemeDesignable {
             return .default
         }
         return .lightContent
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }

@@ -11,7 +11,8 @@ import Photos
 import Kingfisher
 
 extension UIImage {
-    func withInsets(_ insets: UIEdgeInsets) -> UIImage? {
+    
+    open func withInsets(_ insets: UIEdgeInsets) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(
             CGSize(width: size.width + insets.left + insets.right,
                    height: size.height + insets.top + insets.bottom),
@@ -26,7 +27,7 @@ extension UIImage {
         return imageWithInsets
     }
     
-    func resizeImage(_ newSize: CGSize) -> UIImage? {
+    open func resizeImage(_ newSize: CGSize) -> UIImage? {
         func isSameSize(_ newSize: CGSize) -> Bool {
             return size == newSize
         }
@@ -89,7 +90,7 @@ extension UIImage {
 }
 
 extension UIImageView {
-    public func download(urlString: String, placeholder: UIImage? = nil, withCache: Bool = true, compression: CGFloat = 0.5) {
+    open func download(urlString: String, placeholder: UIImage? = nil, withCache: Bool = true, compression: CGFloat = 0.5) {
         let encodedURL = urlString.encodeUrl
         self.image = placeholder
         let url = URL(string: encodedURL)
@@ -99,7 +100,7 @@ extension UIImageView {
         self.download(url: url, placeholder: placeholder, withCache: withCache, key: key, compression: compression)
     }
     
-    private func download(url _uu: URL?, placeholder: UIImage? = nil, withCache: Bool = true, key kk: String, compression: CGFloat = 0.5) {
+    open func download(url _uu: URL?, placeholder: UIImage? = nil, withCache: Bool = true, key kk: String, compression: CGFloat = 0.5) {
         var key = kk
         
         if key.count > 100 {

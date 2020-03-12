@@ -37,7 +37,7 @@ public final class TImageView: TView {
         self.initialize()
     }
     
-    convenience init(frame: CGRect = .zero, padding val: CGFloat) {
+    public convenience init(frame: CGRect = .zero, padding val: CGFloat) {
         self.init(frame: frame)
         self.padding = (left: val, top: val, right: val, bottom: val)
         self.initialize()

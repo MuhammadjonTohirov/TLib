@@ -9,7 +9,7 @@
 import Foundation
 
 /// a view presenter
-public protocol PViewToPresenter {
+public protocol PViewToPresenter: class {
     func viewDidLoad()
     func viewWillAppear()
     func onDismiss()
@@ -30,7 +30,7 @@ extension PViewToPresenter {
 }
 
 /// a connector between a presenter and view, should have a variable inside the view
-public protocol PPresenterToView {
+public protocol PPresenterToView: class {
     func showLoader()
     func hideLoader()
     func showAlert(title: String, message: String)
@@ -61,19 +61,19 @@ extension PPresenterToView {
 }
 
 /// an interactor to a presenter
-public protocol PPresenterToInteractor {
+public protocol PPresenterToInteractor: class {
     
 }
 
 /// a connector between a presenter and an interface, should have a variable inside the interactor
-public protocol PInteractorToPesenter {
+public protocol PInteractorToPesenter: class {
     
 }
 
-public protocol PPresenterToRouter {
+public protocol PPresenterToRouter: class {
     
 }
 
-public protocol PRouterToPresenter {
+public protocol PRouterToPresenter: class {
     
 }

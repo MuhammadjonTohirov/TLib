@@ -21,7 +21,7 @@ extension UIViewController {
     
     open var topSafe: CGFloat {
         get {
-            let h = (self.navigationController?.isNavigationBarHidden ?? false) ? 0 : NavigationUtil.getNavigationBarHeight(self)
+            var h = (self.navigationController?.isNavigationBarHidden ?? false) ? 0 : NavigationUtil.getNavigationBarHeight(self)
             return UUtil.getStatusBarHeight() + h
         }
     }

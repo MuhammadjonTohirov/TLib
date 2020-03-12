@@ -80,7 +80,7 @@ open class TView: UIView, TUIProtocol, TUIContainerProtocol {
     }
     
     /// init function
-    public func initView() {
+    open func initView() {
         self.updateDesign()
     }
     
