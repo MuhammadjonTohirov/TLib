@@ -75,7 +75,7 @@ open class BaseViewController: UIViewController, ThemeDesignable {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.updateDesign()
+        
         self.addSubview(bottomSafeView)
     }
     
@@ -85,6 +85,7 @@ open class BaseViewController: UIViewController, ThemeDesignable {
         backgroundImageView.frame = self.view.frame
         backgroundImageView.clipsToBounds = true
         backgroundImageView.contentMode = .scaleAspectFill
+        self.updateDesign()
     }
     
     open func initialize() {

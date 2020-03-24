@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class FormInputListener: NSObject {
+public class FormInputListener: NSObject {
     public var model: FormModel?
     private unowned let field: Indexable?
     
@@ -25,7 +25,7 @@ public final class FormInputListener: NSObject {
         }
     }
     
-    func addChangeListener() {
+    open func addChangeListener() {
         switch self.field {
         case is ITextField:
             (field as! ITextField).addTarget(self, action: #selector(self.onChange(_:)), for: .editingChanged)
@@ -33,11 +33,14 @@ public final class FormInputListener: NSObject {
         case is TTextField:
             (field as! ITextView).delegate = self
         default:
+            if let f = self.field as? UITextField {
+                f.addTarget(self, action: #selector(self.onChange(_:)), for: .editingChanged)
+            }
             break
         }
     }
     
-    @objc func onChange(_ sender: ITextField) {
+    @objc func onChange(_ sender: UITextField) {
         guard let text = sender.text, let val = self.model?.value else {
             return
         }

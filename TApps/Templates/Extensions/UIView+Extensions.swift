@@ -359,7 +359,7 @@ extension UIView {
         layer.mask = mask
     }
     
-    static func reportUser(_ message: String) {
+    static public func reportUser(_ message: String) {
         if let keyWindow = UIApplication.shared.keyWindow {
             let bounds = UIScreen.main.bounds
             

@@ -9,10 +9,10 @@
 import UIKit
 
 @IBDesignable
-public final class TImageView: TView {
+open class TImageView: TView {
     public let imageView: UIImageView = UIImageView()
     
-    public var image: UIImage? {
+    open var image: UIImage? {
         set {
             self.imageView.image = newValue
         }
@@ -59,19 +59,19 @@ public final class TImageView: TView {
     }
     
     /// init function
-    public func initialize() {
+    open func initialize() {
         self.updateDesign()
         self.addSubview(imageView)
     }
     
     /// layouts subviews function
-    public override func updateFrames(_ size: CGSize) {
+    open override func updateFrames(_ size: CGSize) {
         super.updateFrames(size)
         imageView.frame = self.bounds.inset(by: UIEdgeInsets(top: padding.top, left: padding.left, bottom: padding.bottom, right: padding.right))
     }
     
     /// update design, colors or fonts
-    public override func updateDesign() {
+    open override func updateDesign() {
         
     }
     

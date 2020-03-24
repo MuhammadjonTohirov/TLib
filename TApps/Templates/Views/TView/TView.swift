@@ -74,7 +74,7 @@ open class TView: UIView, TUIProtocol, TUIContainerProtocol {
         self.initView()
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         self.updateFrames(self.size)
     }
@@ -94,15 +94,4 @@ open class TView: UIView, TUIProtocol, TUIContainerProtocol {
         
     }
     
-    open func makeDashedBorderDashed(_ color: UIColor, _ space: NSNumber = 5) {
-        let v = CAShapeLayer()
-        v.strokeColor = color.cgColor
-        v.lineDashPattern = [3, space]
-        v.lineWidth = 3
-        v.frame = self.bounds
-        v.fillColor = UIColor.clear.cgColor
-        v.path = UIBezierPath(rect: self.bounds).cgPath
-        v.cornerRadius = 8
-        self.layer.addSublayer(v)
-    }
 }

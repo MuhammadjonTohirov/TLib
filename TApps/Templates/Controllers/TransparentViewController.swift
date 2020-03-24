@@ -44,6 +44,10 @@ open class TransparentViewController: BaseViewController {
     }
     
     @objc func onClickBack() {
+        self.customDismiss()
+    }
+    
+    open func customDismiss() {
         self.containerView.layoutIfNeeded()
         UIView.animate(withDuration: 0.33, animations: {
             self.containerView.alpha = 0

@@ -9,9 +9,9 @@
 import UIKit
 
 @IBDesignable
-public class TButton: UIButton, TUIProtocol {
+open class TButton: UIButton, TUIProtocol {
     @IBInspectable
-    public var radius: CGFloat = 0 {
+    open var radius: CGFloat = 0 {
         didSet {
             self.clipsToBounds = true
             self.layer.cornerRadius = self.radius
@@ -21,16 +21,16 @@ public class TButton: UIButton, TUIProtocol {
      
     
     @IBInspectable
-    public var shadowColor: UIColor = UIColor.black.withAlphaComponent(0.5)
+    open var shadowColor: UIColor = UIColor.black.withAlphaComponent(0.5)
       
     @IBInspectable
-    public var shadowY: CGFloat = 0 {
+    open var shadowY: CGFloat = 0 {
         didSet {
             self.setupShadow()
         }
     }
     
-    public var labelFont: UIFont  {
+    open var labelFont: UIFont  {
         set {
             self.titleLabel?.font = newValue
         }
@@ -41,27 +41,27 @@ public class TButton: UIButton, TUIProtocol {
     }
      
     @IBInspectable
-    public var shadowX: CGFloat = 0 {
+    open var shadowX: CGFloat = 0 {
         didSet {
             self.setupShadow()
         }
     }
     
     @IBInspectable
-    public var shadowRadius: CGFloat = 8 {
+    open var shadowRadius: CGFloat = 8 {
         didSet {
             self.setupShadow()
         }
     }
 
-    public func setupShadow() {
+    open func setupShadow() {
         self.addShadow(shadowColor: self.shadowColor, radius: self.shadowRadius, width: self.shadowX, height: self.shadowY)
     }
 }
 
 
 extension TButton {
-    public var title: String {
+    open var title: String {
         set {
             self.setTitle(newValue, for: .normal )
         }
@@ -71,7 +71,7 @@ extension TButton {
         }
     }
     
-    public var textAlignment: NSTextAlignment {
+    open var textAlignment: NSTextAlignment {
         set {
             self.titleLabel?.textAlignment = newValue
         }

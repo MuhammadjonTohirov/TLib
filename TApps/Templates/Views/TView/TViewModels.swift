@@ -11,4 +11,9 @@ import UIKit
 public struct TStroke {
     public var width: CGFloat
     public var color: UIColor
+    
+    public init(width w: CGFloat, color: UIColor) {
+        self.width = w
+        self.color = color
+    }
 }
