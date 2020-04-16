@@ -36,6 +36,19 @@ extension Double {
     }
     
     public func asCurrency(_ currency: Currency = .sum) -> String {
-        return "\(self) \(currency.text)"
+        var localize = "uz_UZ"
+        switch currency {
+        case .sum:
+            localize = "uz_UZ"
+        case .dollar:
+            localize = "en_US"
+        case .euro:
+            localize = "en_GB"
+        }
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: localize)
+        
+        return formatter.string(from: NSNumber(value: self)) ?? "\(self) \(currency.text)"
     }
 }

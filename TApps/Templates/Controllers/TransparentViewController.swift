@@ -10,24 +10,24 @@ import UIKit
 
 open class TransparentViewController: BaseViewController {
     public let containerView: TView = TView()
-    public var didViewDisappear: (() -> Void)?
-    public var onViewAppear: (() -> Void)?
+    open var didViewDisappear: (() -> Void)?
+    open var onViewAppear: (() -> Void)?
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .clear
+        
         self.containerView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.initialize()
     }
     
-    public override func initialize() {
+    open override func initialize() {
         super.initialize()
         self.containerView.alpha = 0
         self.addSubview(containerView)
         self.containerView.onClick(self, #selector(onClickBack))
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.containerView.layoutIfNeeded()
@@ -36,14 +36,20 @@ open class TransparentViewController: BaseViewController {
             self.containerView.alpha = 1
             self.onViewAppear?()
         }
+        self.view.backgroundColor = .clear
     }
     
-    public override func updateSubviewFrames(_ size: CGSize) {
+    open override func updateDesign() {
+        super.updateDesign()
+        self.view.backgroundColor = .clear
+    }
+    
+    open override func updateSubviewFrames(_ size: CGSize) {
         super.updateSubviewFrames(size)
         self.containerView.frame = self.view.bounds
     }
     
-    @objc func onClickBack() {
+    @objc open func onClickBack() {
         self.customDismiss()
     }
     

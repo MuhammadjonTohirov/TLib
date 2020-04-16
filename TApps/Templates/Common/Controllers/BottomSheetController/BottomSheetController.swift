@@ -36,16 +36,22 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:)))
         sheetView.addGestureRecognizer(gesture)
+
+        sheetView.shadowColor = UIColor.black.withAlphaComponent(0.2)
+        sheetView.shadowRadius = 10
+
         containerView.addGestureRecognizer(gesture)
         
         onViewAppear = {
-            self.containerView.addSubview(self.sheetView)
+            self.addSubview(self.sheetView)
             self.sheetView.addSubviews(views: self.unwrappedContainer().view)
             self.sheetView.addSubviews(views: self.handlerView)
             self.addChild(self.unwrappedContainer())
         }
         
         didViewDisappear = {
+
+
             self.unwrappedContainer().removeFromParent()
             self.sheetView.removeFromSuperview()
         }
@@ -55,7 +61,7 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
     
     public override func updateSubviewFrames(_ size: CGSize) {
         super.updateSubviewFrames(size)
-        
+        self.view.backgroundColor = .clear
         var x: CGFloat = 0
         var h: CGFloat = defaultHeight - sheetViewDiff
         var y: CGFloat = size.height - h
@@ -65,6 +71,7 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
             UIView.animate(withDuration: 0.11, animations: {
                 self.sheetView.frame = CGRect(x: x, y: y, width: w, height: h)
                 self.containerView.alpha = self.needToClose ? 0 : 1
+                self.sheetView.alpha = self.needToClose ? 0 : 1
             }) { (_) in
                 if self.needToClose {
                     self.onClickBack()
@@ -83,7 +90,6 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
         unwrappedContainer().view.frame = CGRect(x: x, y: y, width: w, height: h)
         
         y = 8
-        
         w = 40
         x = (sheetView.width - w) / 2
         h = 4
@@ -93,6 +99,7 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
     
     @objc func panGesture(_ gesture: UIPanGestureRecognizer) {
         self.sheetViewState = gesture.state
+        
         switch gesture.state {
         case .changed:
             let point = gesture.translation(in: containerView)
@@ -112,6 +119,7 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
             } else {
                 let percentage = self.sheetViewDiff / self.sheetView.height
                 self.containerView.alpha = (1 - percentage)
+                self.sheetView.alpha = 1
             }
             
             if velocity.y >= 600 {
@@ -121,8 +129,8 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
             }
             
             self.view.setNeedsLayout()
-        case .ended:
             
+        case .ended:
             #if DEBUG
             logger.log("gesture", message: "ended")
             #endif
@@ -137,6 +145,14 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
     
     @objc func onClickBody() {
         // empty
+    }
+    
+    public override func onClickBack() {
+        super.onClickBack()
+        UIView.animate(withDuration: 0.33, animations: {
+            self.sheetView.alpha = 0
+        }) { (_) in
+        }
     }
     
     public func setupContainer(controller: T) {

@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable
 open class TButton: UIButton, TUIProtocol {
+    open var hasClickEffect: Bool = false
+    
     @IBInspectable
     open var radius: CGFloat = 0 {
         didSet {

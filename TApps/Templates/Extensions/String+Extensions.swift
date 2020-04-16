@@ -364,11 +364,11 @@ extension String {
 //    public func matches(_ pattern: String) -> Bool {
 //        return self.matches(Regex(pattern))
 //    }
-//    
+//
 //    public func replaceAll(_ regex: Regex, replacement: String) -> String {
 //        return regex.repplaceAll(self, replacement: replacement)
 //    }
-//    
+//
 //    public func replaceAll(_ pattern: String, replacement: String) -> String {
 //        return self.replaceAll(Regex(pattern), replacement: replacement)
 //    }
@@ -428,22 +428,22 @@ extension String {
 }
 
 extension String {
-    var digits: String {
+    public var digits: String {
         return components(separatedBy: CharacterSet.decimalDigits.inverted)
             .joined()
     }
     
-    var encodeUrl : String
+    public var encodeUrl : String
     {
         return self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
     }
     
-    var decodeUrl : String
+    public var decodeUrl : String
     {
         return self.removingPercentEncoding!
     }
     
-    func separate(every: Int, with separator: String) -> String {
+    public func separate(every: Int, with separator: String) -> String {
         return String(stride(from: 0, to: Array(self).count, by: every).map {
                 Array(Array(self)[$0..<min($0 + every, Array(self).count)])
             }.joined(separator: separator))
@@ -454,7 +454,7 @@ extension String {
     }
     
     /// ex: "{\"amount\":\"500\",\"clientid\":\"+9989xxxxxxxx\"}" to dictionary
-    func convertToDictionary() -> [String: String]? {
+    public func convertToDictionary() -> [String: String]? {
         if let data = self.data(using: .utf8) {
             do {
                 let objc = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
@@ -473,7 +473,7 @@ extension String {
 }
 
 extension String {
-    var htmlToAttributedString: NSAttributedString? {
+    public var htmlToAttributedString: NSAttributedString? {
         guard let data = data(using: .utf8) else { return NSAttributedString() }
         do {
             return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
@@ -481,8 +481,17 @@ extension String {
             return NSAttributedString()
         }
     }
-    var htmlToString: String {
+    
+    public var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
+    }
+    
+    public mutating func removeFirst(_ character: Character) {
+        let index: Int = self.getIndex(character)
+        
+        if index != -1 {
+            self.remove(at: self.index(self.startIndex, offsetBy: index))
+        }
     }
 }
 
