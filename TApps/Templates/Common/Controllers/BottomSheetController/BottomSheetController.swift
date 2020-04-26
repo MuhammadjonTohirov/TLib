@@ -56,7 +56,7 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
             self.sheetView.removeFromSuperview()
         }
         
-        self.sheetView.onClick(self, #selector(onClickBody))
+//        self.sheetView.onClick(self, #selector(onClickBody))
     }
     
     public override func updateSubviewFrames(_ size: CGSize) {
