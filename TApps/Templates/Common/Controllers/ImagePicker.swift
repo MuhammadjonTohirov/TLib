@@ -12,12 +12,19 @@ public protocol ImagePickerDelegate: class {
     func didSelect(image: UIImage?)
 }
 
+open class ImagePickerConfig: NSObject {
+    public var takePhotoString = "Take photo"
+    public var cameraRollString = "Camera roll"
+    public var photoLibString = "Photo library"
+    public var cancelString = "Cancel"
+}
+
 open class ImagePicker: NSObject {
 
     private let pickerController: UIImagePickerController
     private weak var presentationController: UIViewController?
     private weak var delegate: ImagePickerDelegate?
-
+    public var config = ImagePickerConfig()
     public init(presentationController: UIViewController, delegate: ImagePickerDelegate) {
         self.pickerController = UIImagePickerController()
 
@@ -46,17 +53,17 @@ open class ImagePicker: NSObject {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        if let action = self.action(for: .camera, title: "Take photo") {
+        if let action = self.action(for: .camera, title: config.takePhotoString) {
             alertController.addAction(action)
         }
-        if let action = self.action(for: .savedPhotosAlbum, title: "Camera roll") {
+        if let action = self.action(for: .savedPhotosAlbum, title: config.cameraRollString) {
             alertController.addAction(action)
         }
-        if let action = self.action(for: .photoLibrary, title: "Photo library") {
+        if let action = self.action(for: .photoLibrary, title: config.photoLibString) {
             alertController.addAction(action)
         }
 
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: config.cancelString, style: .cancel, handler: nil))
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             alertController.popoverPresentationController?.sourceView = sourceView

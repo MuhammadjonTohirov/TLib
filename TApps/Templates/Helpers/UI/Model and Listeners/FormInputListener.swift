@@ -30,7 +30,7 @@ public class FormInputListener: NSObject {
         case is ITextField:
             (field as! ITextField).addTarget(self, action: #selector(self.onChange(_:)), for: .editingChanged)
             self.onChange(field as! ITextField)
-        case is TTextField:
+        case is ITextView:
             (field as! ITextView).delegate = self
         default:
             if let f = self.field as? UITextField {
@@ -71,8 +71,12 @@ public class FormInputListener: NSObject {
         }
     }
     
+    internal func isTextInRange(text: String, range: Int) -> Bool {
+        return text.count <= range
+    }
+    
     internal func logicForStringValue(_ text: String, value: StringValue) {
-        if text.count <= value.maxSize {
+        if isTextInRange(text: text, range: value.maxSize) {
             self.model?.setValue(text)
         } else {
             var t = text
@@ -82,16 +86,41 @@ public class FormInputListener: NSObject {
     }
     
     @objc func onChangeTextView(_ sender: UITextView) {
-        guard let text = sender.text else {
+        guard let text = sender.text, let value = self.model?.value as? StringValue else {
             return
         }
         
-        self.model?.setValue(text)
+        if isTextInRange(text: text, range: value.maxSize) {
+            self.model?.setValue(text)
+        } else {
+            var t = text
+            t.removeLast()
+            (self.field as? ITextView)?.text = t
+        }
     }
 }
 
 extension FormInputListener: UITextViewDelegate {
     public func textViewDidChange(_ textView: UITextView) {
         self.onChangeTextView(textView)
+    }
+    
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let char = text.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if (isBackSpace == -92) {
+                return true
+            }
+        }
+        
+        if text.count > 1 {
+            let t1 = textView.text ?? ""
+            let t = "\(t1)\(text)"
+            if let val = self.model?.value as? StringValue  {
+                return self.isTextInRange(text: t, range: val.maxSize)
+            }
+        }
+        
+        return true
     }
 }
