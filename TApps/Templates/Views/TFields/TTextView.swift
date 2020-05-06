@@ -130,7 +130,7 @@ public final class TTextView: TView {
         let x: CGFloat = 10
         var y: CGFloat = 20
         let w: CGFloat = self.width - 2 * x
-        var h: CGFloat = self.height - y / 2
+        var h: CGFloat = self.height - y * 2
         self.field.frame = CGRect(x: x, y: y, width: w, height: h)
         
         y = 4

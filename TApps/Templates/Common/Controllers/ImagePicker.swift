@@ -25,6 +25,7 @@ open class ImagePicker: NSObject {
     private weak var presentationController: UIViewController?
     private weak var delegate: ImagePickerDelegate?
     public var config = ImagePickerConfig()
+    
     public init(presentationController: UIViewController, delegate: ImagePickerDelegate) {
         self.pickerController = UIImagePickerController()
 
@@ -42,8 +43,12 @@ open class ImagePicker: NSObject {
         guard UIImagePickerController.isSourceTypeAvailable(type) else {
             return nil
         }
-
-        return UIAlertAction(title: title, style: .default) { [unowned self] _ in
+        
+        return UIAlertAction(title: title, style: .default) { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            
             self.pickerController.sourceType = type
             self.presentationController?.present(self.pickerController, animated: true)
         }
