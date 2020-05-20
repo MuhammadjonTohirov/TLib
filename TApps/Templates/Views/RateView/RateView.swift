@@ -28,9 +28,13 @@ public class RateView: UIView {
     
     public var didStarSelected: ((_ selectedStarOrder: Int) -> Void)?
     
-    public convenience init(_ numberOfStars: Int, rateable: Bool = false) {
+    public var starColor: UIColor = UIColor.yellow
+    
+    public var emptyStarColor: UIColor = UIColor.yellow.withAlphaComponent(0.5)
+     
+    public convenience init(_ numberOfStars: Rate, rateable: Bool = false) {
         self.init(frame: .zero)
-        self.numberOfStars = numberOfStars
+        self.numberOfStars = numberOfStars.rawValue
         self.rateable = rateable
         self.generateStars()
     }
@@ -123,9 +127,9 @@ public class RateView: UIView {
             }
             
             if i < r {
-                imageView.image = imageView.image?.changeColor(theme.iconColor)
+                imageView.image = imageView.image?.changeColor(starColor)
             } else {
-                imageView.image = imageView.image?.changeColor(theme.iconColor3)
+                imageView.image = imageView.image?.changeColor(emptyStarColor)
             }
         }
     }
