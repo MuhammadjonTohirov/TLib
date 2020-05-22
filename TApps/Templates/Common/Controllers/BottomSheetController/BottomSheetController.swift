@@ -1,96 +1,174 @@
 //
-//  TransparentViewController.swift
+//  BottomSheetController.swift
 //  uzcard trade
 //
-//  Created by Muhammadjon Tohirov on 1/25/20.
+//  Created by Muhammadjon Tohirov on 1/28/20.
 //  Copyright © 2020 Plum Technologies. All rights reserved.
 //
 
 import UIKit
 
-open class TransparentAnimationConfig {
-    var duration: TimeInterval
-    var delay: TimeInterval
-    var damping: CGFloat
-    var initialVelocity: CGFloat
-    var animationOptions: UIView.AnimationOptions
+public final class BottomSheetController<T>: TransparentViewController where T: BaseViewController {
+    public var sheetView: TView = TView()
     
-    public init(duration: TimeInterval = 0.33, delay: TimeInterval = 0, damping: CGFloat = 2, initialVelocity: CGFloat = 0, animation: UIView.AnimationOptions = .curveLinear) {
-        self.duration = duration
-        self.delay = delay
-        self.damping = damping
-        self.initialVelocity = initialVelocity
-        self.animationOptions = animation
-    }
-}
-
-open class TransparentViewController: BaseViewController {
-    public let containerView: TView = TView()
-    open var didViewDisappear: (() -> Void)?
-    open var onViewAppear: (() -> Void)?
-    open var onViewDisappear: (() -> Void)?
+    public var containerController: T?
     
-    open var config: TransparentAnimationConfig!
+    private var handlerView: TView = TView()
     
-    open override func viewDidLoad() {
+    public var defaultHeight: CGFloat!
+    
+    public var sheetViewDiff: CGFloat = 0
+    
+    private var sheetViewState: UIGestureRecognizer.State = .possible
+    
+    private var needToClose: Bool = false
+    
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if config == nil {
-            config = TransparentAnimationConfig(damping: 2)
-        }
-        
-        self.containerView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.initialize()
     }
     
-    open override func initialize() {
+    public override func initialize() {
         super.initialize()
-        self.containerView.alpha = 0
-        self.addSubview(containerView)
-        self.containerView.onClick(self, #selector(onClickBack))
-    }
-    
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        containerView.backgroundColor = theme.bootmSheetContainerColor
+        handlerView.backgroundColor = theme.bootmSheetHandlerColor
+        sheetView.backgroundColor = theme.bottomSheetBackgroundColor
         
-        self.containerView.layoutIfNeeded()
-        UIView.animate(withDuration: config.duration, delay: config.delay, usingSpringWithDamping: config.damping, initialSpringVelocity: config.initialVelocity, options: config.animationOptions, animations: {
-            self.containerView.alpha = 1
-            self.onViewAppear?()
-        }, completion: nil)
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:)))
+        sheetView.addGestureRecognizer(gesture)
+
+        sheetView.shadowColor = UIColor.black.withAlphaComponent(0.2)
+        sheetView.shadowRadius = 10
+
+        containerView.addGestureRecognizer(gesture)
         
-        self.view.backgroundColor = .clear
-    }
-    
-    open override func updateDesign() {
-        super.updateDesign()
-        self.view.backgroundColor = .clear
-    }
-    
-    open override func updateSubviewFrames(_ size: CGSize) {
-        super.updateSubviewFrames(size)
-        self.containerView.frame = self.view.bounds
-    }
-    
-    @objc open func onClickBack() {
-        self.customDismiss()
-    }
-    
-    open func customDismiss() {
-        self.containerView.layoutIfNeeded()
-        UIView.animate(withDuration: config.duration, delay: config.delay, usingSpringWithDamping: config.damping, initialSpringVelocity: config.initialVelocity, options: config.animationOptions, animations: {
-            self.containerView.alpha = 0
-            self.onViewDisappear?()
-        }) { [weak self] (isOK) in
-            if isOK {
-                if let nav = self?.navigationController {
-                    nav.popViewController(animated: false)
-                    _ = self?.didViewDisappear
-                    return
-                }
-                
-                self?.dismiss(animated: false, completion: self?.didViewDisappear)
-            }
+        onViewAppear = {
+            self.addSubview(self.sheetView)
+            self.sheetView.addSubviews(views: self.unwrappedContainer().view)
+            self.sheetView.addSubviews(views: self.handlerView)
+            self.addChild(self.unwrappedContainer())
         }
+        
+        didViewDisappear = {
+
+
+            self.unwrappedContainer().removeFromParent()
+            self.sheetView.removeFromSuperview()
+        }
+        
+//        self.sheetView.onClick(self, #selector(onClickBody))
+    }
+    
+    public override func updateSubviewFrames(_ size: CGSize) {
+        super.updateSubviewFrames(size)
+        self.view.backgroundColor = .clear
+        var x: CGFloat = 0
+        var h: CGFloat = defaultHeight - sheetViewDiff
+        var y: CGFloat = size.height - h
+        var w: CGFloat = size.width - 2 * x
+        if sheetViewState == .ended {
+            
+            UIView.animate(withDuration: 0.11, animations: {
+                self.sheetView.frame = CGRect(x: x, y: y, width: w, height: h)
+                self.containerView.alpha = self.needToClose ? 0 : 1
+                self.sheetView.alpha = self.needToClose ? 0 : 1
+            }) { (_) in
+                if self.needToClose {
+                    self.onClickBack()
+                }
+            }
+        } else {
+            sheetView.frame = CGRect(x: x, y: y, width: w, height: h)
+        }
+        
+        sheetView.roundCorners(corners: [.topLeft, .topRight], radius: 12)
+        
+        y = 20
+        x = 0
+        h = sheetView.height - y + sheetViewDiff
+        w = sheetView.width
+        unwrappedContainer().view.frame = CGRect(x: x, y: y, width: w, height: h)
+        
+        y = 8
+        w = 40
+        x = (sheetView.width - w) / 2
+        h = 4
+        handlerView.frame = CGRect(x: x, y: y, width: w, height: h)
+        handlerView.radius = h / 2
+    }
+    
+    @objc func panGesture(_ gesture: UIPanGestureRecognizer) {
+        self.sheetViewState = gesture.state
+        
+        switch gesture.state {
+        case .changed:
+            let point = gesture.translation(in: containerView)
+            let velocity = gesture.velocity(in: containerView)
+            
+            #if DEBUG
+            logger.log("velocity", message: "\(velocity)")
+            logger.log("coordinate", message: "\(point)")
+            #endif
+            
+            self.sheetViewDiff = point.y
+            self.needToClose = !(self.sheetViewDiff >= 0 && self.sheetViewDiff <= self.sheetView.height / 2)
+
+            if self.sheetViewDiff < 0 {
+                self.needToClose = false
+                self.sheetViewDiff = 0
+            } else {
+                let percentage = self.sheetViewDiff / self.sheetView.height
+                self.containerView.alpha = (1 - percentage)
+                self.sheetView.alpha = 1
+            }
+            
+            if velocity.y >= 600 {
+                self.needToClose = true
+                self.view.setNeedsLayout()
+                return
+            }
+            
+            self.view.setNeedsLayout()
+            
+        case .ended:
+            #if DEBUG
+            logger.log("gesture", message: "ended")
+            #endif
+            
+            self.sheetViewDiff = needToClose ? self.defaultHeight : 0
+            self.view.setNeedsLayout()
+            
+        default:
+            break
+        }
+    }
+    
+    @objc func onClickBody() {
+        // empty
+    }
+    
+    public override func onClickBack() {
+        super.onClickBack()
+        UIView.animate(withDuration: 0.33, animations: {
+            self.sheetView.alpha = 0
+        }) { (_) in
+        }
+    }
+    
+    public func setupContainer(controller: T) {
+        self.containerController = controller
+        self.defaultHeight = UIScreen.main.bounds.height / 2
+    }
+    
+    public func setHeight(_ height: CGFloat) {
+        self.defaultHeight = height
+    }
+    
+    private func unwrappedContainer() -> T {
+        guard let container = self.containerController else {
+            fatalError("you did not set container controller")
+        }
+        
+        return container
     }
 }
