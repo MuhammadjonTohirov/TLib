@@ -12,6 +12,7 @@ open class TransparentViewController: BaseViewController {
     public let containerView: TView = TView()
     open var didViewDisappear: (() -> Void)?
     open var onViewAppear: (() -> Void)?
+    open var onViewDisappear: (() -> Void)?
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,7 @@ open class TransparentViewController: BaseViewController {
         self.containerView.layoutIfNeeded()
         UIView.animate(withDuration: 0.33, animations: {
             self.containerView.alpha = 0
+            self.onViewDisappear?()
         }) { [weak self](isOK) in
             if isOK {
                 if let nav = self?.navigationController {

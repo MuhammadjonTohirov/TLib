@@ -11,6 +11,7 @@ import UIKit
 public var editableActiveControl: UIControl?
 
 open class BaseViewController: UIViewController, ThemeDesignable {
+    
     fileprivate lazy var backgroundImageView: UIImageView = {
         let v = UIImageView()
         v.tag = 191
