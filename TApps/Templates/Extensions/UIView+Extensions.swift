@@ -69,9 +69,7 @@ extension UIView {
             return self.frame.origin.x
         }
         set(newX) {
-            var newFrame = self.frame
-            newFrame.origin.x = newX
-            self.frame = newFrame
+            self.layer.frame.origin.x = newX
         }
     }
     
@@ -80,9 +78,7 @@ extension UIView {
             return self.frame.origin.y
         }
         set(newY) {
-            var newFrame = self.frame
-            newFrame.origin.y = newY
-            self.frame = newFrame
+            self.layer.frame.origin.y = newY
         }
     }
     
@@ -91,9 +87,7 @@ extension UIView {
             return self.frame.size.width
         }
         set(newWidth) {
-            var newFrame = self.frame
-            newFrame.size.width = newWidth
-            self.frame = newFrame
+            self.size.width = newWidth
         }
     }
     
@@ -102,9 +96,7 @@ extension UIView {
             return self.frame.size.height
         }
         set(newHeight) {
-            var newFrame = self.frame
-            newFrame.size.height = newHeight
-            self.frame = newFrame
+            self.size.height = newHeight
         }
     }
     public var minX: CGFloat {

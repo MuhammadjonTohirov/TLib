@@ -17,7 +17,6 @@ open class TView: UIView, TUIProtocol, TUIContainerProtocol {
         didSet {
             self.clipsToBounds = true
             self.layer.cornerRadius = self.radius
-            self.setNeedsLayout()
         }
     }
     

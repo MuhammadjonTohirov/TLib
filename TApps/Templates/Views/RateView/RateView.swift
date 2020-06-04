@@ -19,14 +19,14 @@ public enum Rate: Int {
     case five = 5
 }
 
-public class RateView: UIView {
-    private var numberOfStars: Int = 5
+open class RateView: UIView {
+    open var numberOfStars: Int = 5
     
-    private var starImage: UIImage = #imageLiteral(resourceName: "icon_star_medium")
+    open var starImage: UIImage = #imageLiteral(resourceName: "icon_star_medium")
     
-    public var rateable: Bool = false
+    open var rateable: Bool = false
     
-    public var didStarSelected: ((_ selectedStarOrder: Int) -> Void)?
+    open var didStarSelected: ((_ selectedStarOrder: Int) -> Void)?
     
     public var starColor: UIColor = UIColor.yellow
     
@@ -48,13 +48,13 @@ public class RateView: UIView {
         fatalError("not implemented method")
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         self.frameForStars()
         
     }
     
-    private func generateStars() {
+    open func generateStars() {
         for i in 0..<numberOfStars {
             let image = self.createStar(tag: i + 100)
             self.addSubview(image)
@@ -68,6 +68,7 @@ public class RateView: UIView {
     }
     
     deinit {
+        
     }
     
     @objc public func onStarClick(_ gesture: UITapGestureRecognizer) {
@@ -78,6 +79,7 @@ public class RateView: UIView {
         if let imageView = gesture.view as? UIImageView {
             let n = imageView.tag - 100
             updateRate(rate: n + 1)
+            self.didStarSelected?(n + 1)
         }
     }
     
@@ -116,10 +118,10 @@ public class RateView: UIView {
         return image
     }
     
-    public func updateRate(rate: Int) {
-        
+    open func updateRate(rate: Int) {
+
         let r = rate > numberOfStars ? numberOfStars : rate
-        self.didStarSelected?(r)
+    
         for i in 0..<numberOfStars {
             
             guard let imageView = (self.viewWithTag(i + 100) as? UIImageView) else {
@@ -127,9 +129,9 @@ public class RateView: UIView {
             }
             
             if i < r {
-                imageView.image = imageView.image?.changeColor(starColor)
+                imageView.image = starImage.changeColor(starColor)
             } else {
-                imageView.image = imageView.image?.changeColor(emptyStarColor)
+                imageView.image = starImage.changeColor(emptyStarColor)
             }
         }
     }

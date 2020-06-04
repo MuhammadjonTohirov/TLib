@@ -22,7 +22,7 @@ open class TImageView: TView {
         }
     }
     
-    public private(set) var padding: (left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) = (2, 2, 2, 2)
+    public private(set) var padding: (left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) = (0, 0, 0, 0)
     
     public override var radius: CGFloat {
         didSet {
