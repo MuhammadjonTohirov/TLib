@@ -11,7 +11,6 @@ import UIKit
 public var editableActiveControl: UIControl?
 
 open class BaseViewController: UIViewController, ThemeDesignable {
-    
     fileprivate lazy var backgroundImageView: UIImageView = {
         let v = UIImageView()
         v.tag = 191
@@ -119,6 +118,12 @@ open class BaseViewController: UIViewController, ThemeDesignable {
         self.updateSubviewFrames(self.view.size)
     }
     
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+    }
+    
     @objc func keyboardShowNotification(notification: NSNotification) {
         if let userInfo = notification.userInfo, let fr = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             self.actionOnKeyboard(true, rect: fr)
@@ -141,7 +146,7 @@ open class BaseViewController: UIViewController, ThemeDesignable {
         
         let fieldFrame = control.convert(control.frame, from: nil)
         let maxY = abs(fieldFrame.origin.y) + fieldFrame.height
-        let distance = rect.origin.y - maxY
+        let distance = rect.origin.y - maxY - 10
         
         func show() {
             UIView.animate(withDuration: 0.33) {
