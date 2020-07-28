@@ -9,6 +9,7 @@
 import UIKit
 
 public var editableActiveControl: UIControl?
+public var editableActiveView: UIView?
 
 open class BaseViewController: UIViewController, ThemeDesignable {
     fileprivate lazy var backgroundImageView: UIImageView = {
