@@ -68,7 +68,7 @@ open class AlertView: NSObject, UIAlertViewDelegate {
         let title = self.title
         let message = self.message
         var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        
+        alert.view.translatesAutoresizingMaskIntoConstraints = true
         if self.names.count > 0 {
             alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.actionSheet)
             

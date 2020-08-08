@@ -92,12 +92,12 @@ open class BaseViewController: UIViewController, ThemeDesignable {
     open func initialize() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.keyboardShowNotification),
-                                               name: UIResponder.keyboardDidShowNotification,
+                                               name: UIResponder.keyboardWillShowNotification,
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.keyboardHideNotification),
-                                               name: UIResponder.keyboardDidHideNotification,
+                                               name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
     }
     
@@ -121,8 +121,8 @@ open class BaseViewController: UIViewController, ThemeDesignable {
     
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     @objc func keyboardShowNotification(notification: NSNotification) {
@@ -141,11 +141,11 @@ open class BaseViewController: UIViewController, ThemeDesignable {
         logger.log(message: "Keyboard visible \(isVisible)")
         self.onKeyboardStateChange?(isVisible, rect)
         
-        guard let control = editableActiveControl else {
+        guard let control = editableActiveView else {
             return
         }
         
-        let fieldFrame = control.convert(control.frame, from: nil)
+        let fieldFrame = control.convert(control.bounds, from: nil)
         let maxY = abs(fieldFrame.origin.y) + fieldFrame.height
         let distance = rect.origin.y - maxY - 10
         

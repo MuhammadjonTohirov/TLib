@@ -28,8 +28,11 @@ public final class FormModel {
     }
     
     
-    public func setValue(_ text: String) {
+    public func setValue(_ text: String, _ isSilent: Bool = false) {
         self.value?.setValue(text)
+        if isSilent {
+            return
+        }
         self.notifyListeners()
     }
     
