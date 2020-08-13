@@ -101,6 +101,11 @@ public class FormInputListener: NSObject {
 }
 
 extension FormInputListener: UITextViewDelegate {
+    
+    public func textViewDidBeginEditing(_ textView: UITextView) {
+        editableActiveView = (self.field as? ITextView)
+    }
+
     public func textViewDidChange(_ textView: UITextView) {
         self.onChangeTextView(textView)
     }

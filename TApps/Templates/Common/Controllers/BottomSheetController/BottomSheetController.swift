@@ -36,27 +36,31 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:)))
         sheetView.addGestureRecognizer(gesture)
-
+        
         sheetView.shadowColor = UIColor.black.withAlphaComponent(0.2)
         sheetView.shadowRadius = 10
-
+        
         containerView.addGestureRecognizer(gesture)
         
-        onViewAppear = {
-            self.addSubview(self.sheetView)
-            self.sheetView.addSubviews(views: self.unwrappedContainer().view)
-            self.sheetView.addSubviews(views: self.handlerView)
-            self.addChild(self.unwrappedContainer())
+        onViewAppear = { [weak self] in
+            guard let safe = self else {
+                return
+            }
+            safe.addSubview(safe.sheetView)
+            safe.sheetView.addSubviews(views: safe.unwrappedContainer().view)
+            safe.sheetView.addSubviews(views: safe.handlerView)
+            safe.addChild(safe.unwrappedContainer())
         }
         
-        didViewDisappear = {
-
-
-            self.unwrappedContainer().removeFromParent()
-            self.sheetView.removeFromSuperview()
+        didViewDisappear = { [weak self] in
+            guard let safe = self else {
+                return
+            }
+            safe.unwrappedContainer().removeFromParent()
+            safe.sheetView.removeFromSuperview()
         }
         
-//        self.sheetView.onClick(self, #selector(onClickBody))
+        //        self.sheetView.onClick(self, #selector(onClickBody))
     }
     
     public override func updateSubviewFrames(_ size: CGSize) {
@@ -112,7 +116,7 @@ public final class BottomSheetController<T>: TransparentViewController where T: 
             
             self.sheetViewDiff = point.y
             self.needToClose = !(self.sheetViewDiff >= 0 && self.sheetViewDiff <= self.sheetView.height / 2)
-
+            
             if self.sheetViewDiff < 0 {
                 self.needToClose = false
                 self.sheetViewDiff = 0

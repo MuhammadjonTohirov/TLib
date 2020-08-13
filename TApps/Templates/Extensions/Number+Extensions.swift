@@ -35,20 +35,17 @@ extension Double {
         return "\(prefix)\(minutesString):\(secondsString)"
     }
     
-    public func asCurrency(_ currency: Currency = .sum) -> String {
-        var localize = "uz_UZ"
-        switch currency {
-        case .sum:
-            localize = "uz_UZ"
-        case .dollar:
-            localize = "en_US"
-        case .euro:
-            localize = "en_GB"
-        }
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: localize)
+    func asCurrency(_ currency: Currency = .sum, locale: Locale = .current) -> String {
         
-        return formatter.string(from: NSNumber(value: self)) ?? "\(self) \(currency.text)"
+        return "\(self.decimalNumber(locale: locale)) \(currency.text)"
     }
+    
+    public func decimalNumber(locale: Locale = .current) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.formatterBehavior = .default
+        formatter.locale = locale
+        return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
+    }
+
 }

@@ -18,9 +18,10 @@ extension Date {
     }
     
     ///
-    public func toString(_ format: String) -> String {
+    public func toString(_ format: String, _ locale: Locale = .current) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
+        formatter.locale = locale
         return formatter.string(from: self)
     }
     
