@@ -19,7 +19,7 @@ public class Logging {
     public var tag: String = "application"
     private var message: String = ""
     public var type: LoggingType = .log
-    
+    private let queue = DispatchQueue(label: "logger_queue")
     public static var shared: Logging = Logging()
     
     public func log(_ className: AnyClass, message: String, type: LoggingType = .log) {
@@ -28,12 +28,17 @@ public class Logging {
     }
     
     public func log(_ tag: String? = nil, message: String, type: LoggingType = .log) {
-        self.type = type
-        if let tag = tag {
-            self.tag = tag
+        queue.async { [weak self] in
+            guard let safe = self else {
+                return
+            }
+            safe.type = type
+            if let tag = tag {
+                safe.tag = tag
+            }
+            safe.message = message
+            safe.print_()
         }
-        self.message = message
-        self.print_()
     }
     
     private func print_() {
