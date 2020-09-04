@@ -59,7 +59,7 @@ public class FormInputListener: NSObject {
     }
     
     internal func logicForPhoneValue(_ text: String, value: PhoneValue) {
-        let format = value.mask.formprivatisedat
+        let format = value.mask.format
         let formatter = DefaultTextFormatter(textPattern: value.mask.format, patternSymbol: "#")
         
         var phoneText = text.removeSpaces().separateBySpace(format: format)
