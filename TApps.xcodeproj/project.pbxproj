@@ -68,6 +68,16 @@
 		C9060E8C241221E300261839 /* UUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9060E45241221E200261839 /* UUtil.swift */; };
 		C9060E8D241221E300261839 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9060E46241221E300261839 /* Theme.swift */; };
 		C9060E8E241221E300261839 /* NUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9060E47241221E300261839 /* NUtil.swift */; };
+		C965774425023FB600048E7E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965773625023FB600048E7E /* String+Extension.swift */; };
+		C965774525023FB600048E7E /* SumTextInputFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965773925023FB600048E7E /* SumTextInputFormatter.swift */; };
+		C965774625023FB600048E7E /* SumTextInputFormatterCaretPositionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965773A25023FB600048E7E /* SumTextInputFormatterCaretPositionCalculator.swift */; };
+		C965774725023FB600048E7E /* SumTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965773B25023FB600048E7E /* SumTextFormatter.swift */; };
+		C965774825023FB600048E7E /* SumFormatParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965773C25023FB600048E7E /* SumFormatParser.swift */; };
+		C965774925023FB600048E7E /* DefaultTextInputFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965773E25023FB600048E7E /* DefaultTextInputFormatter.swift */; };
+		C965774A25023FB600048E7E /* CaretPositionCorrector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965773F25023FB600048E7E /* CaretPositionCorrector.swift */; };
+		C965774B25023FB600048E7E /* DefaultTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965774025023FB600048E7E /* DefaultTextFormatter.swift */; };
+		C965774C25023FB600048E7E /* TextInputFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965774225023FB600048E7E /* TextInputFormatter.swift */; };
+		C965774D25023FB600048E7E /* TextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C965774325023FB600048E7E /* TextFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +157,16 @@
 		C9060E45241221E200261839 /* UUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUtil.swift; sourceTree = "<group>"; };
 		C9060E46241221E300261839 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		C9060E47241221E300261839 /* NUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NUtil.swift; sourceTree = "<group>"; };
+		C965773625023FB600048E7E /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		C965773925023FB600048E7E /* SumTextInputFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumTextInputFormatter.swift; sourceTree = "<group>"; };
+		C965773A25023FB600048E7E /* SumTextInputFormatterCaretPositionCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumTextInputFormatterCaretPositionCalculator.swift; sourceTree = "<group>"; };
+		C965773B25023FB600048E7E /* SumTextFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumTextFormatter.swift; sourceTree = "<group>"; };
+		C965773C25023FB600048E7E /* SumFormatParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumFormatParser.swift; sourceTree = "<group>"; };
+		C965773E25023FB600048E7E /* DefaultTextInputFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTextInputFormatter.swift; sourceTree = "<group>"; };
+		C965773F25023FB600048E7E /* CaretPositionCorrector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaretPositionCorrector.swift; sourceTree = "<group>"; };
+		C965774025023FB600048E7E /* DefaultTextFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTextFormatter.swift; sourceTree = "<group>"; };
+		C965774225023FB600048E7E /* TextInputFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputFormatter.swift; sourceTree = "<group>"; };
+		C965774325023FB600048E7E /* TextFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFormatter.swift; sourceTree = "<group>"; };
 		E2554C889E1E925B99048F96 /* Pods-TApps-TAppsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TApps-TAppsTests.release.xcconfig"; path = "Target Support Files/Pods-TApps-TAppsTests/Pods-TApps-TAppsTests.release.xcconfig"; sourceTree = "<group>"; };
 		E376DB144A06C331949AA2A2 /* Pods-TApps-TAppsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TApps-TAppsTests.debug.xcconfig"; path = "Target Support Files/Pods-TApps-TAppsTests/Pods-TApps-TAppsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -276,6 +296,7 @@
 		C9060E0B241221E200261839 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C965771B25023F7000048E7E /* AnyFormatKit */,
 				C9060E0C241221E200261839 /* Controllers */,
 				C9060E13241221E200261839 /* Views */,
 			);
@@ -483,6 +504,63 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		C965771B25023F7000048E7E /* AnyFormatKit */ = {
+			isa = PBXGroup;
+			children = (
+				C965773525023FB600048E7E /* Categories */,
+				C965773725023FB600048E7E /* TextFormatter */,
+			);
+			path = AnyFormatKit;
+			sourceTree = "<group>";
+		};
+		C965773525023FB600048E7E /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C965773625023FB600048E7E /* String+Extension.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		C965773725023FB600048E7E /* TextFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				C965773825023FB600048E7E /* SumFormatters */,
+				C965773D25023FB600048E7E /* DefaultTextInputFormatters */,
+				C965774125023FB600048E7E /* TextFormatterProtocols */,
+			);
+			path = TextFormatter;
+			sourceTree = "<group>";
+		};
+		C965773825023FB600048E7E /* SumFormatters */ = {
+			isa = PBXGroup;
+			children = (
+				C965773925023FB600048E7E /* SumTextInputFormatter.swift */,
+				C965773A25023FB600048E7E /* SumTextInputFormatterCaretPositionCalculator.swift */,
+				C965773B25023FB600048E7E /* SumTextFormatter.swift */,
+				C965773C25023FB600048E7E /* SumFormatParser.swift */,
+			);
+			path = SumFormatters;
+			sourceTree = "<group>";
+		};
+		C965773D25023FB600048E7E /* DefaultTextInputFormatters */ = {
+			isa = PBXGroup;
+			children = (
+				C965773E25023FB600048E7E /* DefaultTextInputFormatter.swift */,
+				C965773F25023FB600048E7E /* CaretPositionCorrector.swift */,
+				C965774025023FB600048E7E /* DefaultTextFormatter.swift */,
+			);
+			path = DefaultTextInputFormatters;
+			sourceTree = "<group>";
+		};
+		C965774125023FB600048E7E /* TextFormatterProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				C965774225023FB600048E7E /* TextInputFormatter.swift */,
+				C965774325023FB600048E7E /* TextFormatter.swift */,
+			);
+			path = TextFormatterProtocols;
+			sourceTree = "<group>";
+		};
 		CF0427FFC8934930B838661A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -674,6 +752,7 @@
 				C9060E74241221E300261839 /* TView.swift in Sources */,
 				C9060E69241221E300261839 /* ImagePicker.swift in Sources */,
 				C9060E7D241221E300261839 /* TSegmentedController.swift in Sources */,
+				C965774C25023FB600048E7E /* TextInputFormatter.swift in Sources */,
 				C9060E68241221E300261839 /* BottomSheetController.swift in Sources */,
 				C9060E56241221E300261839 /* App+Extensions.swift in Sources */,
 				C9060E83241221E300261839 /* FormInputListener.swift in Sources */,
@@ -682,24 +761,33 @@
 				C9060E89241221E300261839 /* CountryCode.swift in Sources */,
 				C9060E85241221E300261839 /* ITextView.swift in Sources */,
 				C9060E78241221E300261839 /* TCircularView.swift in Sources */,
+				C965774825023FB600048E7E /* SumFormatParser.swift in Sources */,
 				C9060E70241221E300261839 /* BaseViewController.swift in Sources */,
 				C9060E48241221E300261839 /* TAppDelegate.swift in Sources */,
 				C9060E73241221E300261839 /* TViewModels.swift in Sources */,
 				C9060E80241221E300261839 /* TButton.swift in Sources */,
+				C965774A25023FB600048E7E /* CaretPositionCorrector.swift in Sources */,
 				C9060E58241221E300261839 /* Number+Extensions.swift in Sources */,
+				C965774B25023FB600048E7E /* DefaultTextFormatter.swift in Sources */,
 				C9060E86241221E300261839 /* ITextField.swift in Sources */,
 				C9060E8E241221E300261839 /* NUtil.swift in Sources */,
 				C9060E8A241221E300261839 /* Language.swift in Sources */,
+				C965774525023FB600048E7E /* SumTextInputFormatter.swift in Sources */,
 				C90263462419002B00FAE985 /* PViewToPresenter.swift in Sources */,
 				C9060E84241221E300261839 /* FormModel.swift in Sources */,
+				C965774425023FB600048E7E /* String+Extension.swift in Sources */,
 				C9060E6F241221E300261839 /* TransparentViewController.swift in Sources */,
 				C9060E7E241221E300261839 /* TLabelSegment.swift in Sources */,
 				C9060E55241221E300261839 /* UIImage+Extensions.swift in Sources */,
+				C965774725023FB600048E7E /* SumTextFormatter.swift in Sources */,
 				C9060E8D241221E300261839 /* Theme.swift in Sources */,
+				C965774925023FB600048E7E /* DefaultTextInputFormatter.swift in Sources */,
+				C965774625023FB600048E7E /* SumTextInputFormatterCaretPositionCalculator.swift in Sources */,
 				C9060E75241221E300261839 /* TCollectionViewCell.swift in Sources */,
 				C9060E54241221E300261839 /* UIColor+Extensions.swift in Sources */,
 				C9060E72241221E300261839 /* TTableViewCell.swift in Sources */,
 				C9060E51241221E300261839 /* UIView+Extensions.swift in Sources */,
+				C965774D25023FB600048E7E /* TextFormatter.swift in Sources */,
 				C9060E4E241221E300261839 /* Value.swift in Sources */,
 				C9060E4D241221E300261839 /* PhoneValue.swift in Sources */,
 				C9060E7C241221E300261839 /* AlertView.swift in Sources */,

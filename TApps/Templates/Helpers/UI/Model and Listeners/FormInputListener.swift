@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AnyFormatKit
 
 public class FormInputListener: NSObject {
     public var model: FormModel?

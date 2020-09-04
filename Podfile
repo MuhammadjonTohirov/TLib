@@ -7,7 +7,6 @@ target 'TApps' do
 
   # Pods for TApps
   pod 'Kingfisher'
-  pod 'AnyFormatKit'
 
   target 'TAppsTests' do
     # Pods for testing
