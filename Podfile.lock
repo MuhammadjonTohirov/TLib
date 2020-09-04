@@ -1,18 +1,22 @@
 PODS:
+  - AnyFormatKit (2.0.1)
   - Kingfisher (5.13.2):
     - Kingfisher/Core (= 5.13.2)
   - Kingfisher/Core (5.13.2)
 
 DEPENDENCIES:
+  - AnyFormatKit
   - Kingfisher
 
 SPEC REPOS:
   trunk:
+    - AnyFormatKit
     - Kingfisher
 
 SPEC CHECKSUMS:
+  AnyFormatKit: 61952b81da09f5d33f6e8c6f33eef43e33d6ff9d
   Kingfisher: d342c8354c10c3d85a27d6d4c42c41285924b898
 
-PODFILE CHECKSUM: ff00719e6ed3db35c1f0919de9c21abab59c98cf
+PODFILE CHECKSUM: f481713d633f5ddc41b797037a19b2f1410af105
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0.beta.2

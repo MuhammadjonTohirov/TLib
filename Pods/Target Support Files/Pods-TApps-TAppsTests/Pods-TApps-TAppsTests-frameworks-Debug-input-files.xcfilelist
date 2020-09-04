@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-TApps-TAppsTests/Pods-TApps-TAppsTests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AnyFormatKit/AnyFormatKit.framework
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework

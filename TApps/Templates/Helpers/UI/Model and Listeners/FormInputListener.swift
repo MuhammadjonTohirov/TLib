@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AnyFormatKit
 
 public class FormInputListener: NSObject {
     public var model: FormModel?
@@ -59,14 +60,33 @@ public class FormInputListener: NSObject {
     }
     
     internal func logicForPhoneValue(_ text: String, value: PhoneValue) {
-        let phoneText = text.removeSpaces().formattedString(mask: value.mask)
+        let format = value.mask.format
+        let formatter = DefaultTextFormatter(textPattern: value.mask.format, patternSymbol: "#")
+        
+        var phoneText = text.removeSpaces().separateBySpace(format: format)
+        
+        if let prefix = value.prefix, !phoneText.hasPrefix(prefix) {
+            if prefix.count > text.count {
+                phoneText = prefix
+            } else {
+                phoneText.insert(contentsOf: prefix, at: phoneText.startIndex)
+            }
+        }
+        
         if phoneText.count <= value.maxSize {
-            self.model?.setValue(text)
+            if let prefix = value.prefix, !text.hasPrefix(prefix) {
+                if prefix.count > value.getValue().count {
+                    self.model?.setValue("\(prefix)")
+                } else {
+                    self.model?.setValue("\(prefix)\(text)")
+                }
+            } else {
+                self.model?.setValue(text)
+            }
             (self.field as? ITextField)?.text = phoneText
         } else {
             var t = phoneText
             t.removeLast()
-            
             (self.field as? ITextField)?.text = phoneText
         }
     }
@@ -76,11 +96,13 @@ public class FormInputListener: NSObject {
     }
     
     internal func logicForStringValue(_ text: String, value: StringValue) {
+        
         if isTextInRange(text: text, range: value.maxSize) {
             self.model?.setValue(text)
         } else {
             var t = text
             t.removeLast()
+            self.model?.setValue(t, true)
             (self.field as? ITextField)?.text = t
         }
     }

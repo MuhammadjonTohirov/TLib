@@ -38,14 +38,14 @@ extension String {
 
 
 extension String {
-    func formattedString(mask: String = "(XXX) XXX-XXXX") -> String {
+    func formattedString(mask: String = "(XXX) XXX-XXXX", replacer: String.Element = "X") -> String {
         let number = self
         let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
 
         var result = ""
         var index = cleanPhoneNumber.startIndex
         for ch in mask where index < cleanPhoneNumber.endIndex {
-            if ch == "X" {
+            if ch == replacer {
                 result.append(cleanPhoneNumber[index])
                 index = cleanPhoneNumber.index(after: index)
             } else {
@@ -55,6 +55,23 @@ extension String {
         return result
     }
     
+    public func separateBySpace(format: String) -> String {
+        var indexes: [Int] = []
+        var text = self
+        format.enumerated().forEach { (obj) in
+            if obj.element.isWhitespace {
+                indexes.append(obj.offset)
+            }
+        }
+        
+        indexes.forEach { (spaceIndex) in
+            if spaceIndex < text.count {
+                text.insert(" ", at: String.Index(utf16Offset: spaceIndex, in: self))
+            }
+        }
+        
+        return text
+    }
     /// Returns String value between argument characters
     public func subStringFrom(_ fromCharacter: Character, toCharacter: Character) -> String {
         var fromIndex = self.getIndex(fromCharacter)
@@ -277,6 +294,13 @@ extension String {
         let characterSet = CharacterSet.whitespacesAndNewlines
         let newText = self.trimmingCharacters(in: characterSet)
         return newText.isEmpty
+    }
+    
+    public func numbersOnly() -> String {
+        let aSet = NSCharacterSet(charactersIn:"0123456789").inverted
+        let compSepByCharInSet = self.components(separatedBy: aSet)
+        let numberFiltered = compSepByCharInSet.joined(separator: "")
+        return numberFiltered
     }
     ///
     public var isEmail: Bool {
