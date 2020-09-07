@@ -9,13 +9,15 @@
 import Foundation
 
 public class PhoneValue: StringValue {
-    public private(set) var mask: (format: String, replacer: String)
+    public typealias PhoneType = (format: String, replacer: String)
+    
+    public private(set) var mask: PhoneType
     
     public private(set) var prefix: String?
     
     public var formattedValue: ((_ text: String) -> String)?
     
-    public init(_ maxSize: Int, _ mask: (format: String, replacer: String), _ value: String = "", required: Bool = false) {
+    public init(_ maxSize: Int, _ mask: PhoneType, _ value: String = "", required: Bool = false) {
         self.mask = mask
         super.init(maxSize, value, required: required)
         self.manipulateMaks()
@@ -25,6 +27,11 @@ public class PhoneValue: StringValue {
         var m = mask
         m.format.removeAll(where: {$0 == mask.replacer.first ?? "X"})
         self.set(prefix: m.format.removeSpaces())
+    }
+    
+    public func set(mask: PhoneType) {
+        self.mask = mask
+        self.manipulateMaks()
     }
     
     public func set(prefix: String) {
@@ -38,11 +45,13 @@ public class PhoneValue: StringValue {
     
     /// For formatting a phone number
     /// - Parameter mask: The mask of number. ex: +XX XXX XXX XXXX
-    public func formattedNumber() -> String {
+    public func formattedNumber(_ value: String) -> String {
         if let closure = formattedValue {
-            return closure(self.getValue())
+            return closure(value)
         }
         
-        return value.formattedString(mask: self.mask.format, replacer: self.mask.replacer.first ?? "X")
+        let formatter = DefaultTextFormatter(textPattern: mask.format, patternSymbol: "#")
+        
+        return formatter.format(value) ?? value
     }
 }

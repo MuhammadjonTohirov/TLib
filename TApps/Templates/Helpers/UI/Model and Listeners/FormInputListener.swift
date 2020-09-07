@@ -59,18 +59,19 @@ public class FormInputListener: NSObject {
     }
     
     internal func logicForPhoneValue(_ text: String, value: PhoneValue) {
-        let format = value.mask.format
+        var purePhone = text.removeSpaces()
+
+        if let prefix = value.prefix {
+            purePhone = text.replacingOccurrences(of: prefix, with: "").removeSpaces()
+            
+        }
         
-//        let formatter = DefaultTextFormatter(textPattern: value.mask.format, patternSymbol: "#")
+        var phoneText = value.formattedNumber(purePhone)//formatter.format(purePhone) ?? text.removeSpaces()//.separateBySpace(format: format)
         
-        var phoneText = text.removeSpaces().separateBySpace(format: format)
-        
-        if let prefix = value.prefix, !phoneText.hasPrefix(prefix) {
-            if prefix.count > text.count {
-                phoneText = prefix
-            } else {
-                phoneText.insert(contentsOf: prefix, at: phoneText.startIndex)
-            }
+        if purePhone.count < value.prefix?.count ?? 0 { purePhone.removeAll() }
+
+        if text.removeSpaces().count <= value.prefix?.count ?? 0 {
+            phoneText = value.prefix ?? ""
         }
         
         if phoneText.count <= value.maxSize {

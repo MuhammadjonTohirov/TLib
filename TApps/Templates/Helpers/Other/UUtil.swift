@@ -54,5 +54,14 @@ open class UUtil {
             }
         }
     }
+    
+    public static func vibrate() {
+        if #available(iOS 13.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .rigid)
+            generator.impactOccurred()
+        } else {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+        }
+    }
 }
-
